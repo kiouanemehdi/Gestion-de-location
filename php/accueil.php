@@ -4,8 +4,11 @@
 <head>
   <meta charset="utf-8">
   <title>Titre de la page</title>
-  <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
-  <script src="Bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/all.css">
+	
+	<link rel="stylesheet" href="../css/fontawesome.min.css">
+ 
 </head>
 <body>
   ...
@@ -21,31 +24,31 @@
             <li>
               <a href="#" class="nav-link text-secondary">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
-                Home
+                test
               </a>
             </li>
             <li>
               <a href="#" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
-                Dashboard
+                test
               </a>
             </li>
             <li>
               <a href="#" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
-                Orders
+                test
               </a>
             </li>
             <li>
               <a href="#" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
-                Products
+                test
               </a>
             </li>
             <li>
               <a href="#" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
-                Customers
+                test
               </a>
             </li>
           </ul>
@@ -69,8 +72,12 @@
   
   
 
+	<script src="../js/main.js"></script>
+	<script src="../js/popper.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/all.js"></script>
 
-  ...
+
 </body>
 </html>
 
