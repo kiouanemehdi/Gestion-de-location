@@ -3,11 +3,11 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Titre de la page</title>
+  <title>Documents</title>
   <link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/all.css">
-	
 	<link rel="stylesheet" href="../css/fontawesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -52,7 +52,7 @@
     
   </header>
   
-  
+  <h1 class="text-center titre ">Documents</h1>
   
 
 	<script src="../js/main.js"></script>
