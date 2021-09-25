@@ -47,6 +47,7 @@
         
     </header>
     <h1 class="text-center titre ">Listes des Voitures</h1>
+    <p>test</p>
 
 	<script src="../js/main.js"></script>
 	<script src="../js/popper.min.js"></script>
