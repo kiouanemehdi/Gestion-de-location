@@ -16,7 +16,7 @@
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <div  class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                        <h1>EILCO CAR RENTAL</h1>
+                        <h1>EILCO CAR RENTAL 1</h1>
                     </div>
 
                     <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
