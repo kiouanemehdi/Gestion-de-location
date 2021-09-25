@@ -6,13 +6,11 @@
 }
 
 li{
-
 	margin-right: 30px;
 }
 
 #log_out_logo {
-	 margin-left: 300px;
-	 /*display: inline;*/
+	margin-left: 300px;
 }
 
 #log_out_logo :hover{

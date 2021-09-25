@@ -1,0 +1,73 @@
+$("#btn_clients").click(function() {
+    $.ajax({
+        url:'../php/fonctions.php',
+        type: 'POST',
+        dataType: 'JSON',
+        data: {'function':'clients'},
+
+        success: function (resultat, statut) {
+            $("#resultat").html(resultat) ;
+            },
+        error: function(resultat,statut,erreur){
+
+            console.log(erreur);
+        }
+
+        });
+});
+
+$("#btn_voitures").click(function() {
+    $.ajax({
+        url:'../php/fonctions.php',
+        type: 'POST',
+        dataType: 'JSON',
+        data: {'function':'voitures'},
+
+        success: function (resultat, statut) {
+            console.log("ca entre");
+            
+            $("#resultat").html(resultat) ;
+            },
+        error: function(resultat,statut,erreur){
+
+            console.log(erreur);
+        }
+
+        });
+});
+
+$("#btn_reservations").click(function() {
+    $.ajax({
+        url:'../php/fonctions.php',
+        type: 'POST',
+        dataType: 'JSON',
+        data: {'function':'reservations'},
+
+        success: function (resultat, statut) {
+            $("#resultat").html(resultat) ;
+            },
+        error: function(resultat,statut,erreur){
+            console.log(erreur);
+        }
+
+        });
+});
+
+$("#btn_documents").click(function() {
+    $.ajax({
+        url:'../php/fonctions.php',
+        type: 'POST',
+        dataType: 'JSON',
+        data: {'function':'documents'},
+
+        success: function (resultat, statut) {
+            $("#resultat").html(resultat) ;
+            },
+        error: function(resultat,statut,erreur){
+            console.log(erreur);
+        }
+
+        });
+});
+
+
