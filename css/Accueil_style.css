@@ -1,0 +1,24 @@
+
+
+#menu {
+
+	margin-left: 30%;
+}
+
+li{
+
+	margin-right: 30px;
+}
+
+#log_out_logo {
+	 margin-left: 300px;
+	 /*display: inline;*/
+}
+
+#log_out_logo :hover{
+	color: #a80a0f ;
+}
+
+.menu-hover :hover{
+    color: #231182 ;
+}
