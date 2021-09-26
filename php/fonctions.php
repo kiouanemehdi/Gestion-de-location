@@ -67,10 +67,10 @@ function voitures() {
         </div>
       </div>
 
-        <div class='form-row' style='margin-top:30px; margin-left:15%'>
+        <div class='form-row' style='margin-top:30px; margin-left:25%'>
                 <button id='ajouter'class='btn btn-success'> Ajouter </button>
-                <button id='modifier'class='btn btn-primary'> Modifier </button>
-                <button id='supprimer'class='btn btn-danger'> Supprimer </button>
+                <!--<button id='modifier'class='btn btn-primary'> Modifier </button>
+                <button id='supprimer'class='btn btn-danger'> Supprimer </button>-->
                 <button id='effacer'class='btn btn-warning'> Effacer </button>
                 
         </div>
@@ -112,6 +112,10 @@ function voitures() {
                      $('#Prix').val('');
                      $('#Couleur').val('');
                      $('#Disponibilite').val('');
+
+                     ///////////////////////////////////////////////////////////////
+
+                     ///////////////////////////////////////////////////////////////
                   });
 
         </script>

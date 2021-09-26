@@ -59,6 +59,74 @@
 <div id="resultat">
     <h1 class="text-center titre ">Choisissez une page </h1>
 </div>
+
+
+<?php 
+     $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
+
+     
+     /* $res=$conn->query("SELECT * FROM place ") or die($conn->error);*/
+   //$id=$_SESSION['id'];
+   $etat=false;
+    if(isset($_POST['search']) and !empty($_POST['search_input']))
+    {
+        
+        $inp=$_POST['search_input'];
+        $res=$conn->query("SELECT idp,type,place.nom,latitude,longitude,id_fk FROM place JOIN users WHERE users.id='$id' AND users.id=place.id_fk AND place.nom LIKE '$inp%' order by idp DESC") or die($conn->error);
+        $etat=true;
+    }
+    else
+    {
+
+     $res=$conn->query("SELECT * FROM voiture") or die($conn->error);
+     }
+
+     ?>
+
+     <div class="row justify-content-center " style="margin-left: 18%; margin-top: 30px;">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <div class="table-responsive" style="width: 900px;">
+                <table class="table table-striped table-hover table-dark">
+                    
+                    <thead class="thead-dark">
+                        <th scope="col">id_voiture</th>
+                        <th scope="col">matricule</th>
+                        <th scope="col">model</th>
+                        <th scope="col">marque</th>
+                        <th scope="col">categorie</th>
+                        <th scope="col">prix</th>
+                        
+                        <th scope="col" colspan="2" >action</th>
+                    </thead>
+
+                    <?php while ($row=$res->fetch_assoc()):?> 
+                        
+                        <tr scope="row">
+                            <td><?php echo $row['id_voiture']; ?></td>
+                            <td><?php echo $row['matricule']; ?></td>
+                            <td><?php echo $row['model']; ?></td>
+                            <td><?php echo $row['marque']; ?></td>
+                            <td><?php echo $row['categorie']; ?></td>
+                            <td><?php echo $row['prix_location']; ?></td>
+                           
+                            <td>
+                                <a href="form_ajouter.php?editer=<?php echo $row['id_voiture']; ?>"
+                                    class="btn btn-info" ><i class="fas fa-edit"></i></a>
+                                    
+                                <a href="supprimer.php?supprimer=<?php echo $row['id_voiture']; ?>"
+                                onclick="return confirm('êtes-vous sûr de vouloir supprimer cette voiture?')" class="btn btn-warning" ><i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                    
+                </table>
+                </div>
+             </div>
+    </div>
+
+
+ 
 	<script src="../js/main.js"></script>
 	<script src="../js/popper.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
