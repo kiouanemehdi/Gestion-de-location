@@ -71,3 +71,26 @@ $("#btn_documents").click(function() {
 });
 
 
+//traitement du formulaire de voiture
+/*$(document).ready(function (){
+  $("#ajouter").click(function (event) {
+console.log("wa si l9lawi ");
+    //event.preventDefault();
+    //var formData = {
+     var test1= $("#test1").val();
+     var test2= $("#test2").val();
+      console.log("zabi "+test1+" "+test2);
+      $.post("../php/traitement.php",{
+        test1:test1,
+        test2:test2
+      },
+      function(data,statut)
+      {
+
+      }
+      );
+   // };
+
+  });
+
+        });*/

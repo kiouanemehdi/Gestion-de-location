@@ -40,7 +40,7 @@
                         </li>
                         <li class="menu-hover">
                             <a id="btn_documents" class="nav-link " style="color: white;">
-                                <i style="color: white;" class="fas fa-file_alt fa-3x"></i><br>
+                                <i style="color: white;" class="fas fa-file-alt fa-3x"></i><br>
                                 <p style="font-weight: bold;">Documents</p>
                             </a>
                         </li>
@@ -66,5 +66,6 @@
     <script src="../js/menu.js"></script>
 
 </body>
+
 </html>
 
