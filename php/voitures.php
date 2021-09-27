@@ -152,7 +152,19 @@
                   });
 
         </script>
-     "
+     
+</div>
+
+
+
+
+<div class="search-container">
+	 <form method="POST"  action="voitures.php">
+
+	 	<input type="text" name="search_input" style="margin-bottom: 20px; ">
+	 	<button type="submit" value="chercher" name="search"class="btn btn-light"><i class="fas fa-search"></i></button>
+	 	
+	 </form>
 </div>
 
 
@@ -163,7 +175,7 @@
     {
         
         $inp=$_POST['search_input'];
-        $res=$conn->query("SELECT idp,type,place.nom,latitude,longitude,id_fk FROM place JOIN users WHERE users.id='$id' AND users.id=place.id_fk AND place.nom LIKE '$inp%' order by idp DESC") or die($conn->error);
+        $res=$conn->query("SELECT * FROM voiture WHERE categorie LIKE '$inp%' order by id_voiture DESC") or die($conn->error);
         $etat=true;
     }
     else
@@ -173,6 +185,8 @@
 }
 
     ?>
+
+
 
     <div class="row justify-content-center " style="margin-left: 18%; margin-top: 30px;">
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
