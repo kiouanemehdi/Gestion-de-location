@@ -39,7 +39,7 @@
                             </a>
                         </li>
                         <li class="menu-hover">
-                            <a id="documents.php" class="nav-link " style="color: white;">
+                            <a href="documents.php" class="nav-link " style="color: white;">
                                 <i style="color: white;" class="fas fa-file-alt fa-3x"></i><br>
                                 <p style="font-weight: bold;">Documents</p>
                             </a>
