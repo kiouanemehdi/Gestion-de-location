@@ -20,7 +20,7 @@
                 <div style="position: absolute;" id="menu" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <ul id="nav" class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                         <li class="menu-hover">
-                            <a id="voitures.php" class="nav-link " style="color: white;">
+                            <a href="voitures.php" class="nav-link " style="color: white;">
                                 <i style="color: white;" class="fas fa-car fa-3x"></i><br>
                                 <p style="font-weight: bold;">Voitures</p>
                             </a>
@@ -223,7 +223,7 @@ if(isset($_GET['editer']))
 
 
 
-<div class="search-container" style="margin-left: 930px; margin-top: 20px;">
+<div class="search-container" style="margin-top: 20px;">
 	 <form method="POST"  action="voitures.php" style="display: inline-block;">
 
 	 	<input type="text" name="search_input" style="margin-bottom: 20px; ">
