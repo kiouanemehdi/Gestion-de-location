@@ -56,46 +56,128 @@
         </div>
         
     </header>
+
+
+<?php 
+session_start();
+$update=false;
+            $id_voiture="";
+            $matricule="";
+            $model="";
+            $marque="";
+            $categorie="";
+            $prix_location="";
+            $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
+
+            if(isset($_GET['supprimer'])){
+	
+	
+                $id_voiture=$_GET['supprimer'];
+                $conn->query("DELETE FROM voiture WHERE id_voiture='$id_voiture'");
+                header("location:voitures.php");
+        
+            }
+
+    if(isset($_POST['ajouter']))
+    {
+        
+        //$id_voiture=$row['id_voiture'];
+            $matricule=$_POST['matricule'];
+            $model=$_POST['model'];
+            $marque=$_POST['marque'];
+            $categorie=$_POST['categorie'];
+            $prix_location=$_POST['prix_location'];
+
+
+        $conn->query("INSERT INTO voiture (matricule,model,marque,categorie,prix_location) VALUES ('$matricule','$model','$marque','$categorie','$prix_location')") or die($conn->error);
+
+
+        header("location:voitures.php");
+    //}
+    }
+
+
+if(isset($_GET['editer']))
+    {
+        $id_voiture=$_GET['editer'];
+        $_SESSION['id_voiture_edit']=$id_voiture;
+        $update=true;
+        $res=$conn->query("SELECT * FROM voiture WHERE id_voiture='$id_voiture'") or die($conn->error);
+
+        if(mysqli_num_rows($res))
+        {
+
+            $row=$res->fetch_array();
+            $id_voiture=$row['id_voiture'];
+            $matricule=$row['matricule'];
+            $model=$row['model'];
+            $marque=$row['marque'];
+            $categorie=$row['categorie'];
+            $prix_location=$row['prix_location'];
+         }
+    }
+
+    if(isset($_POST['modifier']))
+    {
+            $id_voiture=$_SESSION['id_voiture_edit'];
+            $matricule=$_POST['matricule'];
+            $model=$_POST['model'];
+            $marque=$_POST['marque'];
+            $categorie=$_POST['categorie'];
+            $prix_location=$_POST['prix_location'];
+        $conn->query("UPDATE voiture SET matricule='$matricule',model='$model',marque='$marque',categorie='$categorie',prix_location='$prix_location' WHERE id_voiture=$id_voiture") or die($conn->error);
+        header("location:voitures.php");
+
+    }
+
+
+?>
+
+
+
 <div id="form">
     <h1 class="text-center titre ">Choisissez une page </h1>
     
     <div id='cadre' style='margin-left:25%; margin-top:50px;'>
 
+
+<form action="voitures.php" method="POST">
         <div class='form-row'>
         <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
           <label >Matricule</label>
-          <input type='text' class='form-control' id='Matricule'>
+          <input type='text' name="matricule" class='form-control' id='Matricule' value="<?php echo $matricule ?>">
         </div>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
           <label >Marque</label>
-          <select id='Marque' class='form-control'>
-            <option selected>Choose...</option>
+          <input type="text" name="marque" class='form-control' value="<?php echo $marque ?>">
+          <!--<select id='Marque'  name="marque" class='form-control' value="<?php //echo $marque ?>">
+             <option selected>Choose...</option>
             <option> peugeot</option>
             <option>renault</option>
             <option>Tesla</option>
             <option >volvo</option>
             
-          </select>
+          </select>-->
         </div>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
           <label >Model</label>
-          <input type='text' class='form-control' id='Model'>
+          <input type='text'  name="model" class='form-control' id='Model' value="<?php echo $model ?>">
         </div>
       </div>
 
       <div class='form-row' style='margin-top:20px;'>
         <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
           <label >Prix</label>
-          <input type='number' class='form-control' id='Prix'>
+          <input type='number'  name="prix_location" class='form-control' id='Prix' value="<?php echo $prix_location ?>">
         </div>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
           <label >Couleur</label>
-          <input type='text' class='form-control' id='Couleur'>
+          <input type='text'  name="categorie" class='form-control' id='Couleur' value="<?php echo $categorie ?>">
         </div>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
           <label >Disponibilite</label>
-          <select id='Disponibilite' class='form-control'>
-            <option selected>Choose...</option>
+          <select id='Disponibilite'  name="disponibilite" class='form-control' value="">
+            <option selected >Choose...</option>
             <option value='1'> oui</option>
             <option value='0'> non</option>
         </select>
@@ -103,44 +185,27 @@
     </div>
 
         <div class='form-row' style='margin-top:30px; margin-left:25%'>
-                <button id='ajouter'class='btn btn-success'> Ajouter </button>
+
+            <?php if($update==true): ?>
+                <button id='modifier' name="modifier" class='btn btn-success'> Modifier </button>
+            <?php else: ?>
+                <button id='ajouter' name="ajouter" class='btn btn-success'> Ajouter </button>
+            <?php endif; ?>
+                
                 <!--<button id='modifier'class='btn btn-primary'> Modifier </button>
                 <button id='supprimer'class='btn btn-danger'> Supprimer </button>-->
                 <button id='effacer'class='btn btn-warning'> Effacer </button>
                 
         </div>
-
+</form>
     </div>
 
 
         
 <script type='text/javascript'> 
-            $('#ajouter').click(function (event) {
-                console.log('wa si l9lawi ');
-                    //event.preventDefault();
-                    //var formData = {
-                    var Matricule= $('#Matricule').val();
-                    var Marque= $('#Marque').val();
-                    var Model= $('#Model').val();
-                    var Prix= $('#Prix').val();
-                    var Couleur= $('#Couleur').val();
-                    var Disponibilite= $('#Disponibilite').val();
 
-                      console.log('disp '+Disponibilite+' '+Marque);
-                      $.post('../php/traitement.php',{
-                        Matricule:Matricule,
-                        Marque:Marque,
-                        Model:Model,
-                        Prix:Prix,
-                        Couleur:Couleur,
-                        Disponibilite:Disponibilite
-                      },
-                      function(data,statut)
-                      {
-
-                      }
-                      );
-                   
+            $('#effacer').click(function (event) {
+                
                     $('#Matricule').val('');
                     $('#Marque').val('');
                     $('#Model').val('');
@@ -158,8 +223,8 @@
 
 
 
-<div class="search-container">
-	 <form method="POST"  action="voitures.php">
+<div class="search-container" style="margin-left: 930px; margin-top: 20px;">
+	 <form method="POST"  action="voitures.php" style="display: inline-block;">
 
 	 	<input type="text" name="search_input" style="margin-bottom: 20px; ">
 	 	<button type="submit" value="chercher" name="search"class="btn btn-light"><i class="fas fa-search"></i></button>
@@ -169,13 +234,13 @@
 
 
 <?php 
-     $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
+     
     $etat=false;
     if(isset($_POST['search']) and !empty($_POST['search_input']))
     {
         
         $inp=$_POST['search_input'];
-        $res=$conn->query("SELECT * FROM voiture WHERE categorie LIKE '$inp%' order by id_voiture DESC") or die($conn->error);
+        $res=$conn->query("SELECT * FROM voiture WHERE categorie LIKE '$inp%' OR model LIKE '$inp%' or matricule LIKE '$inp%' or marque LIKE '$inp%' or prix_location LIKE '$inp%' order by id_voiture DESC") or die($conn->error);
         $etat=true;
     }
     else
@@ -188,7 +253,7 @@
 
 
 
-    <div class="row justify-content-center " style="margin-left: 18%; margin-top: 30px;">
+    <div class="row justify-content-center " style="margin-left: 18%; margin-top: 5px;">
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
         <div class="table-responsive" style="width: 900px;">
                 <table class="table table-striped table-hover table-dark">
@@ -214,10 +279,10 @@
                             <td><?php echo $row['categorie']; ?></td>
                             <td><?php echo $row['prix_location']; ?></td>
                             <td>
-                                <a href="form_ajouter.php?editer=<?php echo $row['id_voiture']; ?>"
+                                <a href="voitures.php?editer=<?php echo $row['id_voiture']; ?>"
                                     class="btn btn-info" ><i class="fas fa-edit"></i></a>
                                     
-                                <a href="supprimer.php?supprimer=<?php echo $row['id_voiture']; ?>"
+                                <a href="voitures.php?supprimer=<?php echo $row['id_voiture']; ?>"
                                 onclick="return confirm('êtes-vous sûr de vouloir supprimer cette voiture?')" class="btn btn-warning" ><i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>

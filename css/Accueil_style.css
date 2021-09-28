@@ -20,3 +20,9 @@ li{
 .menu-hover :hover{
     color: #231182 ;
 }
+
+
+.search-container{
+
+	margin-left: 50px;
+}
