@@ -61,6 +61,7 @@
 <?php 
 session_start();
 $update=false;
+$recherche=false;
             $id_voiture="";
             $matricule="";
             $model="";
@@ -190,7 +191,8 @@ if(isset($_GET['editer']))
 </form>
     </div>
 
-
+     
+</div>
         
 <script type='text/javascript'> 
 
@@ -206,29 +208,22 @@ if(isset($_GET['editer']))
             });
 
         </script>
-     
-</div>
 
 
 
 
-<div class="search-container" style="margin-top: 20px;">
-	 <form method="POST"  action="voitures.php" style="display: inline-block;">
 
-	 	<input type="text" name="search_input" style="margin-bottom: 20px; ">
-	 	<button type="submit" value="chercher" name="search"class="btn btn-light"><i class="fas fa-search"></i></button>
-	 	
-	 </form>
-</div>
+
 
 
 <?php 
      
-    $etat=false;
+   
     if(isset($_POST['search']) and !empty($_POST['search_input']))
     {
-        
+         $recherche=true;
         $inp=$_POST['search_input'];
+        $_SESSION['recherche']=$inp;
         $res=$conn->query("SELECT * FROM voiture WHERE categorie LIKE '$inp%' OR model LIKE '$inp%' or matricule LIKE '$inp%' or marque LIKE '$inp%' or prix_location LIKE '$inp%' order by id_voiture DESC") or die($conn->error);
         $etat=true;
     }
@@ -240,9 +235,29 @@ if(isset($_GET['editer']))
 
     ?>
 
+<div style="">
+    
+<div class="search-container" style="margin-top: 20px; ">
+     <form method="POST"  action="voitures.php" style="display: inline-block;">
+
+        <input type="text" name="search_input" style="margin-bottom: 10px; ">
+        <button type="submit" value="chercher" name="search"class="btn btn-light"><i class="fas fa-search"></i></button>
+        
+     </form>
+</div>
+<div class="term_recherche" style="margin-left: 840px;" >
+        <?php if ($recherche==true) { ?>
+
+            <p> Votre derniere recherche est : " <?php echo $_SESSION['recherche']; ?> "</p>
+
+            <a href="voitures.php" class="btn btn-warning"> Annuler votre recherche</a>
+
+        <?php } ?>
+    </div>
+</div>
 
 
-    <div class="row justify-content-center " style="margin-left: 18%; margin-top: 5px;">
+    <div class="row justify-content-center " style="margin-left: 18%; margin-top: 5px; display:block;">
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
         <div class="table-responsive" style="width: 900px;">
                 <table class="table table-striped table-hover table-dark">
