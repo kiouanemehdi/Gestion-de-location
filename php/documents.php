@@ -55,10 +55,30 @@
             </div>
         </div>
         
+
+
+        
     </header>
 <div id="resultat">
     <h1 class="text-center titre ">Documents </h1>
 </div>
+
+
+<form action="documents.php" method="post">
+    <input type="submit" name="faire" value="GO" />
+</form>
+
+<?php
+    if(isset($_POST['faire']))
+    {
+        echo "ahmed";
+    }
+    
+?>
+
+
+
+
 
 	<script src="../js/main.js"></script>
 	<script src="../js/popper.min.js"></script>

@@ -62,8 +62,8 @@ session_start();
 $update=false;
             $id_client="";
             $mail="";
-            $prenom="";
-            $nom="";
+            $Prenom="";
+            $Nom="";
             $adresse="";
             $tel="";
             $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
@@ -82,13 +82,13 @@ $update=false;
         
         //$id_client=$row['id_client'];
             $mail=$_POST['mail'];
-            $prenom=$_POST['prenom'];
-            $nom=$_POST['nom'];
+            $Prenom=$_POST['Prenom'];
+            $Nom=$_POST['Nom'];
             $adresse=$_POST['adresse'];
             $tel=$_POST['tel'];
 
 
-        $conn->query("INSERT INTO client (mail,prenom,nom,adresse,tel) VALUES ('$mail','$prenom','$nom','$adresse','$tel')") or die($conn->error);
+        $conn->query("INSERT INTO client (mail,Prenom,Nom,adresse,tel) VALUES ('$mail','$Prenom','$Nom','$adresse','$tel')") or die($conn->error);
 
 
         header("location:clients.php");
@@ -109,8 +109,8 @@ if(isset($_GET['editer']))
             $row=$res->fetch_array();
             $id_client=$row['id_client'];
             $mail=$row['mail'];
-            $prenom=$row['prenom'];
-            $nom=$row['nom'];
+            $Prenom=$row['Prenom'];
+            $Nom=$row['Nom'];
             $adresse=$row['adresse'];
             $tel=$row['tel'];
         }
@@ -120,11 +120,11 @@ if(isset($_GET['editer']))
     {
             $id_client=$_SESSION['id_client_edit'];
             $mail=$_POST['mail'];
-            $prenom=$_POST['prenom'];
-            $nom=$_POST['nom'];
+            $Prenom=$_POST['Prenom'];
+            $Nom=$_POST['Nom'];
             $adresse=$_POST['adresse'];
             $tel=$_POST['tel'];
-        $conn->query("UPDATE client SET mail='$mail',prenom='$prenom',nom='$nom',adresse='$adresse',tel='$tel' WHERE id_client=$id_client") or die($conn->error);
+        $conn->query("UPDATE client SET mail='$mail',Prenom='$Prenom',Nom='$Nom',adresse='$adresse',tel='$tel' WHERE id_client=$id_client") or die($conn->error);
         header("location:clients.php");
 
     }
@@ -144,12 +144,12 @@ if(isset($_GET['editer']))
         <div class='form-row'>
         
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
-          <label >nom</label>
-          <input type="text" name="nom" class='form-control' value="<?php echo $nom ?>">
+          <label >Nom</label>
+          <input type="text" name="Nom" class='form-control' value="<?php echo $Nom ?>">
         </div>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
-          <label >prenom</label>
-          <input type='text'  name="prenom" class='form-control' id='prenom' value="<?php echo $prenom ?>">
+          <label >Prenom</label>
+          <input type='text'  name="Prenom" class='form-control' id='Prenom' value="<?php echo $Prenom ?>">
         </div>
         <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
           <label >mail</label>
@@ -192,8 +192,8 @@ if(isset($_GET['editer']))
             $('#effacer').click(function (event) {
                 
                     $('#mail').val('');
-                    $('#nom').val('');
-                    $('#prenom').val('');
+                    $('#Nom').val('');
+                    $('#Prenom').val('');
                     $('#tel').val('');
                     $('#adresse').val('');
                     $('#Disponibilite').val('');
@@ -223,7 +223,7 @@ if(isset($_GET['editer']))
     {
         
         $inp=$_POST['search_input'];
-        $res=$conn->query("SELECT * FROM client WHERE adresse LIKE '$inp%' OR prenom LIKE '$inp%' or mail LIKE '$inp%' or nom LIKE '$inp%' or tel LIKE '$inp%' order by id_client DESC") or die($conn->error);
+        $res=$conn->query("SELECT * FROM client WHERE adresse LIKE '$inp%' OR Prenom LIKE '$inp%' or mail LIKE '$inp%' or Nom LIKE '$inp%' or tel LIKE '$inp%' order by id_client DESC") or die($conn->error);
         $etat=true;
     }
     else
@@ -243,8 +243,8 @@ if(isset($_GET['editer']))
                     
                     <thead class="thead-dark">
                         <th scope="col">id_client</th>
-                        <th scope="col">prenom</th>
-                        <th scope="col">nom</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Nom</th>
                         <th scope="col">adresse</th>
                         <th scope="col">tel</th>
                         <th scope="col">mail</th>

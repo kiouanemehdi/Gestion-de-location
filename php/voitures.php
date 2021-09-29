@@ -80,20 +80,13 @@ $update=false;
 
     if(isset($_POST['ajouter']))
     {
-        
-        //$id_voiture=$row['id_voiture'];
             $matricule=$_POST['matricule'];
             $model=$_POST['model'];
             $marque=$_POST['marque'];
             $categorie=$_POST['categorie'];
             $prix_location=$_POST['prix_location'];
-
-
         $conn->query("INSERT INTO voiture (matricule,model,marque,categorie,prix_location) VALUES ('$matricule','$model','$marque','$categorie','$prix_location')") or die($conn->error);
-
-
         header("location:voitures.php");
-    //}
     }
 
 
@@ -106,7 +99,6 @@ if(isset($_GET['editer']))
 
         if(mysqli_num_rows($res))
         {
-
             $row=$res->fetch_array();
             $id_voiture=$row['id_voiture'];
             $matricule=$row['matricule'];
@@ -114,7 +106,7 @@ if(isset($_GET['editer']))
             $marque=$row['marque'];
             $categorie=$row['categorie'];
             $prix_location=$row['prix_location'];
-         }
+        }
     }
 
     if(isset($_POST['modifier']))
@@ -192,8 +184,6 @@ if(isset($_GET['editer']))
                 <button id='ajouter' name="ajouter" class='btn btn-success'> Ajouter </button>
             <?php endif; ?>
                 
-                <!--<button id='modifier'class='btn btn-primary'> Modifier </button>
-                <button id='supprimer'class='btn btn-danger'> Supprimer </button>-->
                 <button id='effacer'class='btn btn-warning'> Effacer </button>
                 
         </div>
@@ -213,8 +203,7 @@ if(isset($_GET['editer']))
                     $('#Couleur').val('');
                     $('#Disponibilite').val('');
 
-                     
-                  });
+            });
 
         </script>
      
