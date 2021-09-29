@@ -7,11 +7,10 @@
     <link rel="stylesheet" href="../css/all.css">	
     <link rel="stylesheet" href="../css/fontawesome.min.css">
     <link rel="stylesheet" href="../css/Accueil_style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
-	<header style="position: relative;">
+<header style="position: relative;">
         <div style="background-color: #292b2c; height: 100px;" class="px-3 py-2 text-white">
             <div class="container">
                 <div id="logo" style="position: absolute;margin-top: -70px;">
@@ -39,7 +38,7 @@
                             </a>
                         </li>
                         <li class="menu-hover">
-                            <a href="Documents.php" class="nav-link " style="color: white;">
+                            <a href="documents.php" class="nav-link " style="color: white;">
                                 <i style="color: white;" class="fas fa-file-alt fa-3x"></i><br>
                                 <p style="font-weight: bold;">Documents</p>
                             </a>
@@ -55,38 +54,12 @@
             </div>
         </div>
         
-
-
-        
     </header>
-<div id="resultat">
-    <h1 class="text-center titre ">Documents </h1>
-</div>
-
-
-<!-- <form action="documents.php" method="post">
-    <input type="submit" name="faire" value="GO" />
-</form>
-
-<?php
-    if(isset($_POST['faire']))
-    {
-        echo "ahmed";
-    }
-    
-?>
- -->
-
-
-
-
-	<script src="../js/main.js"></script>
+    <script src="../js/main.js"></script>
 	<script src="../js/popper.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/all.js"></script>
     <script src="../js/menu.js"></script>
-
-</body>
+    </body>
 
 </html>
-
