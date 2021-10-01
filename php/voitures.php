@@ -11,51 +11,51 @@
 </head>
 
 <body>
-	<header style="position: relative;">
-        <div style="background-color: #292b2c; height: 100px;" class="px-3 py-2 text-white">
-            <div class="container">
-                <div id="logo" style="position: absolute;margin-top: -70px;">
-                    <img style="" src="../img/logo.png" height="240px" width="240px">
-                </div>
-                <div style="position: absolute;" id="menu" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <ul id="nav" class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-                        <li class="menu-hover">
-                            <a href="voitures.php" class="nav-link " style="color: white;">
-                                <i style="color: white;" class="fas fa-car fa-3x"></i><br>
-                                <p style="font-weight: bold;">Voitures</p>
-                            </a>
-                        </li>
-                        <!--<li   class="menu-hover">
-                            <a href="clients.php"  class="nav-link " style="color: white;">
-                                <i style="color: white;" class="fas fa-user fa-3x"></i><br>
-                                <p style="font-weight: bold;">Clients</p>
-                            </a>
-                            
-                        </li>-->
-                        <li class="menu-hover">
-                            <a href="reservations.php" class="nav-link " style="color: white;">
-                                <i style="color: white;" class="fas fa-key fa-3x"></i><br>
-                                <p style="font-weight: bold;">Reservations</p>
-                            </a>
-                        </li>
-                        <li class="menu-hover">
-                            <a href="historique.php" class="nav-link " style="color: white;">
-                                <i style="color: white;" class="fas fa-history fa-3x"></i><br>
-                                <p style="font-weight: bold;">Documents</p>
-                            </a>
-                        </li>
-                       <!-- <li>
-                            <a id="log_out_logo" href="#" class="nav-link" style="color: #d30038;">
-                                <i style="color: #d30038;" class="fas fa-sign-out-alt fa-3x"></i><br>
-                                <p style="font-weight: bold;"> Deconnexion</p>
-                            </a>
-                        </li>-->
-                        </ul>   
-                </div>
+<header style="position: relative;">
+    <div style="background-color: #292b2c; height: 100px;" class="px-3 py-2 text-white">
+        <div class="container">
+            <div id="logo" style="position: absolute;margin-top: -70px;">
+                <img style="" src="../img/logo.png" height="240px" width="240px">
+            </div>
+            <div style="position: absolute;" id="menu" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <ul id="nav" class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                    <li class="menu-hover">
+                        <a href="voitures.php" class="nav-link " style="color: white;">
+                            <i style="color: white;" class="fas fa-car fa-3x"></i><br>
+                            <p style="font-weight: bold;">Voitures</p>
+                        </a>
+                    </li>
+                    <!--<li   class="menu-hover">
+                        <a href="clients.php"  class="nav-link " style="color: white;">
+                            <i style="color: white;" class="fas fa-user fa-3x"></i><br>
+                            <p style="font-weight: bold;">Clients</p>
+                        </a>
+                        
+                    </li>-->
+                    <li class="menu-hover">
+                        <a href="reservations.php" class="nav-link " style="color: white;">
+                            <i style="color: white;" class="fas fa-key fa-3x"></i><br>
+                            <p style="font-weight: bold;">Reservations</p>
+                        </a>
+                    </li>
+                    <li class="menu-hover">
+                        <a href="historique.php" class="nav-link " style="color: white;">
+                            <i style="color: white;" class="fas fa-history fa-3x"></i><br>
+                            <p style="font-weight: bold;">historique</p>
+                        </a>
+                    </li>
+                   <!-- <li>
+                        <a id="log_out_logo" href="#" class="nav-link" style="color: #d30038;">
+                            <i style="color: #d30038;" class="fas fa-sign-out-alt fa-3x"></i><br>
+                            <p style="font-weight: bold;"> Deconnexion</p>
+                        </a>
+                    </li>-->
+                    </ul>   
             </div>
         </div>
-        
-    </header>
+    </div>
+    
+</header>
 
 
 <?php 
@@ -86,7 +86,8 @@ $recherche=false;
             $marque=$_POST['marque'];
             $categorie=$_POST['categorie'];
             $prix_location=$_POST['prix_location'];
-        $conn->query("INSERT INTO voiture (matricule,model,marque,categorie,prix_location) VALUES ('$matricule','$model','$marque','$categorie','$prix_location')") or die($conn->error);
+            $etat_voiture=$_POST['etat_voiture'];
+        $conn->query("INSERT INTO voiture (matricule,model,marque,categorie,prix_location,etat_voiture) VALUES ('$matricule','$model','$marque','$categorie','$prix_location','$etat_voiture')") or die($conn->error);
         header("location:voitures.php");
     }
 
@@ -164,16 +165,19 @@ if(isset($_GET['editer']))
           <input type='number'  name="prix_location" class='form-control' id='Prix' value="<?php echo $prix_location ?>">
         </div>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
-          <label >Categorie</label>
+          <label >Couleur</label>
           <input type='text'  name="categorie" class='form-control' id='Couleur' value="<?php echo $categorie ?>">
         </div>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
-          <label >Disponibilite</label>
-          <select id='Disponibilite'  name="disponibilite" class='form-control' value="">
+          <label > Etat de la voiture </label>
+          <textarea id="etat_voiture" name="etat_voiture" rows="1" cols="50">  </textarea>
+
+     
+          <!--<select id='Disponibilite'  name="disponibilite" class='form-control' value="">
             <option selected >Choose...</option>
             <option value='1'> oui</option>
             <option value='0'> non</option>
-        </select>
+        </select>-->
         </div>
     </div>
 
@@ -259,7 +263,7 @@ if(isset($_GET['editer']))
 
     <div class="row justify-content-center " style="margin-left: 18%; margin-top: 5px; display:block;">
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
-        <div class="table-responsive" style="width: 900px;">
+        <div class="table-responsive" style="width: 1100px;">
                 <table class="table table-striped table-hover table-dark">
                     
                     <thead class="thead-dark">
@@ -269,6 +273,7 @@ if(isset($_GET['editer']))
                         <th scope="col">marque</th>
                         <th scope="col">categorie</th>
                         <th scope="col">prix</th>
+                        <th scope="col">etat de la voiture</th>
                         
                         <th scope="col" colspan="2" >action</th>
                     </thead>
@@ -282,6 +287,7 @@ if(isset($_GET['editer']))
                             <td><?php echo $row['marque']; ?></td>
                             <td><?php echo $row['categorie']; ?></td>
                             <td><?php echo $row['prix_location']; ?></td>
+                            <td><?php echo $row['etat_voiture']; ?></td>
                             <td>
                                 <a href="voitures.php?editer=<?php echo $row['id_voiture']; ?>"
                                     class="btn btn-info" ><i class="fas fa-edit"></i></a>
