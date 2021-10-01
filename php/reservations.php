@@ -89,6 +89,22 @@ $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
         $conn->query("INSERT INTO reservation (id_client,id_voiture,date_location,date_retour,montant) VALUES ('$id_client','$id_voiture','$date_location','$date_retour','$montant')") or die($conn->error);
         header("location:reservations.php");
     }
+    if(isset($_POST['contrat']))
+    {
+        $mat_voiture=$_POST['mat_voiture'];
+        $date_location=$_POST['date_debut'];
+        $date_retour=$_POST['date_fin'];
+        $test=$_POST['test'];
+        $res=$conn->query("SELECT * FROM voiture WHERE id_voiture='$mat_voiture'") or die($conn->error);
+
+        $row=$res->fetch_array();
+            $matricule=$row['matricule'];
+            $model=$row['model'];
+            $marque=$row['marque'];
+
+        $test=fopen("$matricule.txt","w");
+        header("location:reservations.php");
+    }
 
 
 if(isset($_GET['editer']))
@@ -136,7 +152,7 @@ if(isset($_GET['editer']))
 
         <form action="reservations.php" method="POST">
         <div class='form-row'>
-        
+        <input type="text" name="test" >
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
           <label >Matricule de Voiture</label>
           <select id='mat_voiture'  name="mat_voiture" class='form-control' value="<?php //echo $marque ?>">
@@ -196,6 +212,7 @@ if(isset($_GET['editer']))
                 <button id='modifier' name="modifier" class='btn btn-success'> Modifier </button>
             <?php else: ?>
                 <button id='ajouter' name="ajouter" class='btn btn-success'> Ajouter </button>
+                <button id='contrat' name="contrat" class='btn btn-primary'> contrat </button>
             <?php endif; ?>
                 
                 <button id='effacer'class='btn btn-warning'> Effacer </button>
