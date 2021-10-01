@@ -25,31 +25,31 @@
                                 <p style="font-weight: bold;">Voitures</p>
                             </a>
                         </li>
-                        <li   class="menu-hover">
+                        <!--<li   class="menu-hover">
                             <a href="clients.php"  class="nav-link " style="color: white;">
                                 <i style="color: white;" class="fas fa-user fa-3x"></i><br>
                                 <p style="font-weight: bold;">Clients</p>
                             </a>
                             
-                        </li>
+                        </li>-->
                         <li class="menu-hover">
                             <a href="reservations.php" class="nav-link " style="color: white;">
                                 <i style="color: white;" class="fas fa-key fa-3x"></i><br>
                                 <p style="font-weight: bold;">Reservations</p>
                             </a>
                         </li>
-                        <li class="menu-hover">
-                            <a href="documents.php" class="nav-link " style="color: white;">
-                                <i style="color: white;" class="fas fa-file-alt fa-3x"></i><br>
-                                <p style="font-weight: bold;">Documents</p>
+                       <li class="menu-hover">
+                            <a href="historique.php" class="nav-link " style="color: white;">
+                                <i style="color: white;" class="fas fa-history fa-3x"></i><br>
+                                <p style="font-weight: bold;">Historique</p>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a id="log_out_logo" href="#" class="nav-link" style="color: #d30038;">
                                 <i style="color: #d30038;" class="fas fa-sign-out-alt fa-3x"></i><br>
                                 <p style="font-weight: bold;"> Deconnexion</p>
                             </a>
-                        </li>
+                        </li>-->
                         </ul>   
                 </div>
             </div>
@@ -60,14 +60,24 @@
     <?php 
 session_start();
 $update=false;
+$recherche=false;
             $id_reservation="";
             $id_client="";
-            $id_voiture="";
+            //$id_voiture="";
             $date_location="";
             $date_retour="";
             $montant="";
-            $matricule="";
+            //$matricule="";
             $mail="";
+
+            $id_voiture="";
+            $matricule="";
+            $model="";
+            $marque="";
+            $categorie="";
+            $prix_location="";
+
+
 $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
 
             if(isset($_GET['supprimer'])){
@@ -81,17 +91,18 @@ $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
 
     if(isset($_POST['ajouter']))
     {
-            $id_client=$_POST['id_client'];
-            $id_voiture=$_POST['mat_voiture'];
+            $id_client=1;
+            $id_voiture_add=$_SESSION['id_voiture_edit'];
             $date_location=$_POST['date_debut'];
             $date_retour=$_POST['date_fin'];
-            $montant=$_POST['prix_location'];
-        $conn->query("INSERT INTO reservation (id_client,id_voiture,date_location,date_retour,montant) VALUES ('$id_client','$id_voiture','$date_location','$date_retour','$montant')") or die($conn->error);
+            $montant=$_POST['prix_voit'];
+        $conn->query("INSERT INTO reservation (id_client,id_voiture,date_location,date_retour,montant) VALUES ('$id_client','$id_voiture_add','$date_location','$date_retour','$montant')") or die($conn->error);
         header("location:reservations.php");
     }
     if(isset($_POST['contrat']))
     {
-        $mat_voiture=$_POST['mat_voiture'];
+        //$mat_voiture=$_POST['mat_voiture'];
+
         $date_location=$_POST['date_debut'];
         $date_retour=$_POST['date_fin'];
         $test=$_POST['test'];
@@ -107,7 +118,7 @@ $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
     }
 
 
-if(isset($_GET['editer']))
+/*if(isset($_GET['editer']))
     {
         $id_reservation=$_GET['editer'];
         $_SESSION['id_resevaion_edit']=$id_reservation;
@@ -138,8 +149,29 @@ if(isset($_GET['editer']))
         $conn->query("UPDATE reservation SET id_voiture='$id_voiture',id_client='$id_client',date_location='$date_location',date_retour='$date_retour',montant='$montant' WHERE id_reservation=$id_reservation") or die($conn->error);
         header("location:reservations.php");
 
-    }
+    }*/
    
+
+   if(isset($_GET['reserver']))
+    {
+        $id_voiture=$_GET['reserver'];
+        $_SESSION['id_voiture_edit']=$id_voiture;
+       // $update=true;
+        $res=$conn->query("SELECT * FROM voiture WHERE id_voiture='$id_voiture'") or die($conn->error);
+
+        if(mysqli_num_rows($res))
+        {
+            $row=$res->fetch_array();
+            $id_voiture=$row['id_voiture'];
+            $matricule=$row['matricule'];
+            $model=$row['model'];
+            $marque=$row['marque'];
+            $categorie=$row['categorie'];
+            $prix_location=$row['prix_location'];
+        }
+    }
+
+
 
          $res_voiture=$conn->query("SELECT id_voiture,matricule FROM voiture ") or die($conn->error);
          $res_client=$conn->query("SELECT id_client,mail FROM client ") or die($conn->error);
@@ -152,40 +184,43 @@ if(isset($_GET['editer']))
 
         <form action="reservations.php" method="POST">
         <div class='form-row'>
-        <input type="text" name="test" >
+       <!-- <input type="text" name="test" >-->
+ <h3> Info Voiture</h3>
+
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
           <label >Matricule de Voiture</label>
-          <select id='mat_voiture'  name="mat_voiture" class='form-control' value="<?php //echo $marque ?>">
-            <option value="0" selected>Choose...</option>
-          <?php while ($row=$res_voiture->fetch_array()) {
-                
-                $id_voiture_=$row['id_voiture'];
-                $matricule=$row['matricule'];
-         ?>
-                <option value="<?php echo $id_voiture_; ?>"> <?php echo $matricule; ?> </option>
-        <?php }?>
-          </select>
+          <input type="text" name="mat_voiture" id='mat_voiture' class='form-control' readonly="readonly"  value="<?php echo $matricule;  ?>">
       
         </div>
 
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
-          <label >Client</label>
-          <select id='id_client'  name="id_client" class='form-control' value="<?php //echo $marque ?>">
+            <label >Prix</label>
+             <input type="text" id='prix_voit'  name="prix_voit" class='form-control' readonly="readonly"  value="<?php echo $prix_location;  ?>">
+        </div>
 
-                <option value="0" selected>Choose...</option>
-                <?php while ($row=$res_client->fetch_array()) {
-                //$row=$res_client->fetch_array();
-                $id_client_=$row['id_client'];
-                $mail=$row['mail'];
-         ?>
-                <option value="<?php echo $id_client_; ?>"> <?php echo $mail; ?> </option>
-        <?php }?>
+        <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
+            <label >Marque</label>
+            <input type="text" id='Marque'  name="Marque" class='form-control' readonly="readonly"  value="<?php echo $marque;  ?>">
 
-          </select>
+        </div>
+    </div>
+<div class='form-row'>
+        <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
+            <label >Model</label>
+             <input type="text" id='Model'  name="Model" class='form-control' readonly="readonly"  value="<?php echo $model;  ?>">
+
+        </div>
+
+        <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
+            <label >Categorie</label>
+             <input type="text" id='Categorie'  name="Categorie" class='form-control' readonly="readonly"  value="<?php echo $categorie;  ?>">
+
         </div>
 </div>
 
 <div class='form-row'>
+
+ <h3> Info reservation</h3>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
           <label >Date de debut</label>
           <input type='date'  name="date_debut" class='form-control' id='date_debut' value="<?php echo $date_location;  ?>">
@@ -198,13 +233,34 @@ if(isset($_GET['editer']))
         </div>
       </div>
 
-      <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
-          <label >Prix</label>
-          <input type='number'  name="prix_location" class='form-control' id='Prix' value="<?php echo $montant ?>">
+
+<h3 > Info Client</h3>
+<div class='form-row' >
+
+    <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
+          <label >Nom</label>
+          <input type='text'  name="prix_location" class='form-control' id='Prix' value="<?php //echo $ ?>">
     </div>
+    <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
+          <label >Prenom</label>
+          <input type='text'  name="prix_location" class='form-control' id='Prix' value="<?php //echo $ ?>">
+    </div>
+ </div>
+    <div class='form-row'>
+<div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
+          <label >Num permis</label>
+          <input type='text'  name="prix_location" class='form-control' id='Prix' value="<?php //echo $ ?>">
+    </div>
+
+    <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
+          <label >Email</label>
+          <input type='email'  name="email" class='form-control' id='email' value="<?php //echo $ ?>">
+    </div>
+
+
 </div>
 
-
+</div>
 
         <div class='form-row' style='margin-top:30px; margin-left:25%'>
 
@@ -219,8 +275,8 @@ if(isset($_GET['editer']))
                 
         </div>
 </form>
-</div>
 
+</div>
 <script type='text/javascript'> 
 
             $('#effacer').click(function (event) {
@@ -238,56 +294,83 @@ if(isset($_GET['editer']))
 
         <?php 
      
-    $etat=false;
+   
     if(isset($_POST['search']) and !empty($_POST['search_input']))
     {
-        
+         $recherche=true;
         $inp=$_POST['search_input'];
-        $res=$conn->query("SELECT * FROM reservation WHERE id_reservation LIKE '$inp%' OR id_client LIKE '$inp%' or id_voiture LIKE '$inp%' or date_location LIKE '$inp%' or date_retour LIKE '$inp%' or montant LIKE '$inp%' order by id_reservation DESC") or die($conn->error);
+        $_SESSION['recherche']=$inp;
+        $res=$conn->query("SELECT * FROM voiture WHERE categorie LIKE '$inp%' OR model LIKE '$inp%' or matricule LIKE '$inp%' or marque LIKE '$inp%' or prix_location LIKE '$inp%' order by id_voiture DESC") or die($conn->error);
         $etat=true;
     }
     else
     {
 
-     $res=$conn->query("SELECT * FROM reservation") or die($conn->error);
+     $res=$conn->query("SELECT * FROM voiture") or die($conn->error);
 }
 
     ?>
 
+<div style="">
+    
+<div class="search-container" style="margin-top: 20px; ">
+     <form method="POST"  action="reservations.php" style="display: inline-block;">
+
+        <input type="text" name="search_input" style="margin-bottom: 10px; ">
+        <button type="submit" value="chercher" name="search"class="btn btn-light"><i class="fas fa-search"></i></button>
+        
+     </form>
+</div>
+<div class="term_recherche" style="margin-left: 840px;" >
+        <?php if ($recherche==true) { ?>
+
+            <p> Votre derniere recherche est : " <?php echo $_SESSION['recherche']; ?> "</p>
+
+            <a href="reservations.php" class="btn btn-warning"> Annuler votre recherche</a>
+
+        <?php } ?>
+    </div>
+</div>
 
 
-    <div class="row justify-content-center " style="margin-left: 18%; margin-top: 5px;">
+    <div class="row justify-content-center " style="margin-left: 18%; margin-top: 5px; display:block;">
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
         <div class="table-responsive" style="width: 900px;">
                 <table class="table table-striped table-hover table-dark">
                     
                     <thead class="thead-dark">
-                        <th scope="col">id_reservation</th>
-                        <th scope="col">id_client</th>
                         <th scope="col">id_voiture</th>
-                        <th scope="col">date de location</th>
-                        <th scope="col">date de retour</th>
-                        <th scope="col">montant</th>
+                        <th scope="col">matricule</th>
+                        <th scope="col">model</th>
+                        <th scope="col">marque</th>
+                        <th scope="col">categorie</th>
+                        <th scope="col">prix</th>
                         
-                        <th scope="col" colspan="2" >action</th>
+                        <th scope="col" colspan="1" >action</th>
                     </thead>
 
                     <?php while ($row=$res->fetch_assoc()):?> 
                         
                         <tr scope="row">
-                            <td><?php echo $row['id_reservation']; ?></td>
-                            <td><?php echo $row['id_client']; ?></td>
                             <td><?php echo $row['id_voiture']; ?></td>
-                            <td><?php echo $row['date_location']; ?></td>
-                            <td><?php echo $row['date_retour']; ?></td>
-                            <td><?php echo $row['montant']; ?></td>
+                            <td><?php echo $row['matricule']; ?></td>
+                            <td><?php echo $row['model']; ?></td>
+                            <td><?php echo $row['marque']; ?></td>
+                            <td><?php echo $row['categorie']; ?></td>
+                            <td><?php echo $row['prix_location']; ?></td>
                             <td>
-                                <a href="reservations.php?editer=<?php echo $row['id_reservation']; ?>"
+                                <!--<a href="reservations.php?editer=<?php echo $row['id_voiture']; ?>"
                                     class="btn btn-info" ><i class="fas fa-edit"></i></a>
                                     
-                                <a href="reservations.php?supprimer=<?php echo $row['id_reservation']; ?>"
-                                onclick="return confirm('êtes-vous sûr de vouloir supprimer cette reservation?')" class="btn btn-warning" ><i class="fas fa-trash-alt"></i>
+                                <a href="reservations.php?supprimer=<?php echo $row['id_voiture']; ?>"
+                                onclick="return confirm('êtes-vous sûr de vouloir supprimer cette voiture?')" class="btn btn-warning" ><i class="fas fa-trash-alt"></i>
+                                </a>-->
+
+                                <a href="reservations.php?reserver=<?php echo $row['id_voiture']; ?>"
+                                class="btn btn-success" ><i class="fas fa-key"></i>
                                 </a>
+
+
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -296,7 +379,6 @@ if(isset($_GET['editer']))
                 </div>
             </div>
     </div>
-
 
 
 

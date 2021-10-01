@@ -25,20 +25,20 @@
                                 <p style="font-weight: bold;">Voitures</p>
                             </a>
                         </li>
-                        <li   class="menu-hover">
+                        <!--<li   class="menu-hover">
                             <a href="clients.php"  class="nav-link " style="color: white;">
                                 <i style="color: white;" class="fas fa-user fa-3x"></i><br>
                                 <p style="font-weight: bold;">Clients</p>
                             </a>
                             
-                        </li>
+                        </li>-->
                         <li class="menu-hover">
                             <a href="reservations.php" class="nav-link " style="color: white;">
                                 <i style="color: white;" class="fas fa-key fa-3x"></i><br>
                                 <p style="font-weight: bold;">Reservations</p>
                             </a>
                         </li>
-                        <li class="menu-hover">
+                        <!--<li class="menu-hover">
                             <a href="Documents.php" class="nav-link " style="color: white;">
                                 <i style="color: white;" class="fas fa-file-alt fa-3x"></i><br>
                                 <p style="font-weight: bold;">Documents</p>
@@ -49,7 +49,7 @@
                                 <i style="color: #d30038;" class="fas fa-sign-out-alt fa-3x"></i><br>
                                 <p style="font-weight: bold;"> Deconnexion</p>
                             </a>
-                        </li>
+                        </li>-->
                         </ul>   
                 </div>
             </div>

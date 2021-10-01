@@ -1,0 +1,116 @@
+    <div id='cadre' style='margin-left:25%; margin-top:50px;'>
+
+        <form action="reservations.php" method="POST">
+        <div class='form-row'>
+       <!-- <input type="text" name="test" >-->
+ <h3> Info Voiture</h3>
+
+        <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
+          <label >Matricule de Voiture</label>
+          <input type="text" name="mat_voiture" id='mat_voiture' class='form-control' readonly="readonly">
+          <!--<select id='mat_voiture'  name="mat_voiture" class='form-control' value="<?php //echo $marque ?>">
+            <option value="0" selected>Choose...</option>
+          <?php /*while ($row=$res_voiture->fetch_array()) {
+                
+                $id_voiture_=$row['id_voiture'];
+                $matricule=$row['matricule'];
+         ?>
+                <option value="<?php echo $id_voiture_; ?>"> <?php echo $matricule; ?> </option>
+        <?php }*/?>
+          </select>-->
+      
+        </div>
+
+        <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
+            <label >Prix</label>
+             <input type="text" id='prix_voit'  name="prix_voit" class='form-control' readonly="readonly">
+
+         <!-- <label >Client</label>
+          <select id='id_client'  name="id_client" class='form-control' value="<?php //echo $marque ?>">
+
+                <option value="0" selected>Choose...</option>
+                <?php /*while ($row=$res_client->fetch_array()) {
+                //$row=$res_client->fetch_array();
+                $id_client_=$row['id_client'];
+                $mail=$row['mail'];
+         ?>
+                <option value="<?php echo $id_client_; ?>"> <?php echo $mail; ?> </option>
+        <?php }*/?>
+
+          </select>-->
+        </div>
+
+        <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
+            <label >Marque</label>
+             <input type="text" id='Marque'  name="Marque" class='form-control' readonly="readonly">
+
+        </div>
+    </div>
+<div class='form-row'>
+        <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
+            <label >Model</label>
+             <input type="text" id='Model'  name="Model" class='form-control' readonly="readonly">
+
+        </div>
+
+        <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
+            <label >Categorie</label>
+             <input type="text" id='Categorie'  name="Categorie" class='form-control' readonly="readonly">
+
+        </div>
+</div>
+
+<div class='form-row'>
+
+ <h3> Info reservation</h3>
+        <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
+          <label >Date de debut</label>
+          <input type='date'  name="date_debut" class='form-control' id='date_debut' value="<?php echo $date_location;  ?>">
+        </div>
+      
+
+      <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
+          <label >Date de fin</label>
+          <input type='date'  name="date_fin" class='form-control' id='date_fin' value="<?php echo $date_retour;  ?>">
+        </div>
+      </div>
+
+
+<h3 > Info Client</h3>
+<div class='form-row' >
+
+    <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
+          <label >Nom</label>
+          <input type='text'  name="prix_location" class='form-control' id='Prix' value="<?php //echo $ ?>">
+    </div>
+    <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
+          <label >Prenom</label>
+          <input type='text'  name="prix_location" class='form-control' id='Prix' value="<?php //echo $ ?>">
+    </div>
+ </div>
+    <div class='form-row'>
+<div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
+          <label >Num permis</label>
+          <input type='text'  name="prix_location" class='form-control' id='Prix' value="<?php //echo $ ?>">
+    </div>
+
+
+</div>
+
+</div>
+
+        <div class='form-row' style='margin-top:30px; margin-left:25%'>
+
+            <?php if($update==true): ?>
+                <button id='modifier' name="modifier" class='btn btn-success'> Modifier </button>
+            <?php else: ?>
+                <button id='ajouter' name="ajouter" class='btn btn-success'> Ajouter </button>
+                <button id='contrat' name="contrat" class='btn btn-primary'> contrat </button>
+            <?php endif; ?>
+                
+                <button id='effacer'class='btn btn-warning'> Effacer </button>
+                
+        </div>
+</form>
+
+</div>

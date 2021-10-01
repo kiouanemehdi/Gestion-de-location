@@ -25,13 +25,13 @@
                                 <p style="font-weight: bold;">Voitures</p>
                             </a>
                         </li>
-                        <li   class="menu-hover">
+                        <!--<li   class="menu-hover">
                             <a href="clients.php"  class="nav-link " style="color: white;">
                                 <i style="color: white;" class="fas fa-user fa-3x"></i><br>
                                 <p style="font-weight: bold;">Clients</p>
                             </a>
                             
-                        </li>
+                        </li>-->
                         <li class="menu-hover">
                             <a href="reservations.php" class="nav-link " style="color: white;">
                                 <i style="color: white;" class="fas fa-key fa-3x"></i><br>
@@ -39,17 +39,17 @@
                             </a>
                         </li>
                         <li class="menu-hover">
-                            <a href="documents.php" class="nav-link " style="color: white;">
-                                <i style="color: white;" class="fas fa-file-alt fa-3x"></i><br>
+                            <a href="historique.php" class="nav-link " style="color: white;">
+                                <i style="color: white;" class="fas fa-history fa-3x"></i><br>
                                 <p style="font-weight: bold;">Documents</p>
                             </a>
                         </li>
-                        <li>
+                       <!-- <li>
                             <a id="log_out_logo" href="#" class="nav-link" style="color: #d30038;">
                                 <i style="color: #d30038;" class="fas fa-sign-out-alt fa-3x"></i><br>
                                 <p style="font-weight: bold;"> Deconnexion</p>
                             </a>
-                        </li>
+                        </li>-->
                         </ul>   
                 </div>
             </div>
@@ -164,7 +164,7 @@ if(isset($_GET['editer']))
           <input type='number'  name="prix_location" class='form-control' id='Prix' value="<?php echo $prix_location ?>">
         </div>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
-          <label >Couleur</label>
+          <label >Categorie</label>
           <input type='text'  name="categorie" class='form-control' id='Couleur' value="<?php echo $categorie ?>">
         </div>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
