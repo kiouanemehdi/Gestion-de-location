@@ -68,6 +68,7 @@ $recherche=false;
             $marque="";
             $categorie="";
             $prix_location="";
+            $etat_voiture="";
             $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
 
             if(isset($_GET['supprimer'])){
@@ -108,6 +109,7 @@ if(isset($_GET['editer']))
             $marque=$row['marque'];
             $categorie=$row['categorie'];
             $prix_location=$row['prix_location'];
+            $etat_voiture=$row['etat_voiture'];
         }
     }
 
@@ -119,7 +121,8 @@ if(isset($_GET['editer']))
             $marque=$_POST['marque'];
             $categorie=$_POST['categorie'];
             $prix_location=$_POST['prix_location'];
-        $conn->query("UPDATE voiture SET matricule='$matricule',model='$model',marque='$marque',categorie='$categorie',prix_location='$prix_location' WHERE id_voiture=$id_voiture") or die($conn->error);
+             $etat_voiture=$_POST['etat_voiture'];
+        $conn->query("UPDATE voiture SET matricule='$matricule',model='$model',marque='$marque',categorie='$categorie',prix_location='$prix_location',etat_voiture='$etat_voiture' WHERE id_voiture=$id_voiture") or die($conn->error);
         header("location:voitures.php");
 
     }
@@ -170,7 +173,7 @@ if(isset($_GET['editer']))
         </div>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
           <label > Etat de la voiture </label>
-          <textarea id="etat_voiture" name="etat_voiture" rows="1" cols="50">  </textarea>
+          <textarea id="etat_voiture" name="etat_voiture" rows="1" cols="50" > <?php echo $etat_voiture ;?></textarea>
 
      
           <!--<select id='Disponibilite'  name="disponibilite" class='form-control' value="">
