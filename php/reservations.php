@@ -101,56 +101,32 @@ $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
     }
     if(isset($_POST['contrat']))
     {
-        //$mat_voiture=$_POST['mat_voiture'];
-
+        $mat_voiture=$_POST['mat_voiture'];
         $date_location=$_POST['date_debut'];
         $date_retour=$_POST['date_fin'];
-        $test=$_POST['test'];
-        $res=$conn->query("SELECT * FROM voiture WHERE id_voiture='$mat_voiture'") or die($conn->error);
+        $tel=$_POST['tel'];
+        $nom=$_POST['nom'];
+        $prenom=$_POST['prenom'];
+        $montant=$_POST['prix'];
+        $model=$_POST['model'];
+        $marque=$_POST['marque'];
 
-        $row=$res->fetch_array();
-            $matricule=$row['matricule'];
-            $model=$row['model'];
-            $marque=$row['marque'];
-
-        $test=fopen("$matricule.txt","w");
+        $test=fopen("$mat_voiture-$nom.txt","a+");
+        file_put_contents("$mat_voiture-$nom.txt", '*********Contrat de Location*********',FILE_APPEND);
+        fwrite($test, "\n");
+        file_put_contents("$mat_voiture-$nom.txt", "Nom :$nom \n Prenom: $prenom \n   tel: $tel",FILE_APPEND);
+        fwrite($test, "\n\n");
+        file_put_contents("$mat_voiture-$nom.txt", "Marque: $marque  model: $model \n   prix_location: $mat_voiture",FILE_APPEND);
+        fwrite($test, "\n\n");
+        file_put_contents("$mat_voiture-$nom.txt", "Date de location: $date_location \n   Date de retour: $date_retour",FILE_APPEND);
+        fwrite($test, "\n\n");
+        file_put_contents("$mat_voiture-$nom.txt", "Prix de location par jour : $montant",FILE_APPEND);
+        fwrite($test, "\n\n");
+        file_put_contents("$mat_voiture-$nom.txt", "Merci de votre confiance: \n\n Signature Client  :                    cachet Agence:",FILE_APPEND);
+        
+        
         header("location:reservations.php");
     }
-
-
-/*if(isset($_GET['editer']))
-    {
-        $id_reservation=$_GET['editer'];
-        $_SESSION['id_resevaion_edit']=$id_reservation;
-        $update=true;
-        $res=$conn->query("SELECT * FROM reservation WHERE id_reservation='$id_reservation'") or die($conn->error);
-
-        if(mysqli_num_rows($res))
-        {
-            $row=$res->fetch_array();
-            $id_voiture=$row['id_voiture'];
-            $id_client=$row['id_client'];
-            $date_location=$row['date_location'];
-            $date_retour=$row['date_retour'];
-            $montant=$row['montant'];
-            
-        }
-    }
-
-    if(isset($_POST['modifier']))
-    {
-            $id_reservation=$_SESSION['id_resevaion_edit'];
-            $id_voiture=$_POST['mat_voiture'];
-            $id_client=$_POST['id_client'];
-            $date_location=$_POST['date_debut'];
-            $date_retour=$_POST['date_fin'];
-            $montant=$_POST['prix_location'];
-            
-        $conn->query("UPDATE reservation SET id_voiture='$id_voiture',id_client='$id_client',date_location='$date_location',date_retour='$date_retour',montant='$montant' WHERE id_reservation=$id_reservation") or die($conn->error);
-        header("location:reservations.php");
-
-    }*/
-   
 
    if(isset($_GET['reserver']))
     {
@@ -195,25 +171,25 @@ $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
 
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
             <label >Prix</label>
-             <input type="text" id='prix_voit'  name="prix_voit" class='form-control' readonly="readonly"  value="<?php echo $prix_location;  ?>">
+             <input type="text" id='prix'  name="prix" class='form-control' readonly="readonly"  value="<?php echo $prix_location;  ?>">
         </div>
 
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
             <label >Marque</label>
-            <input type="text" id='Marque'  name="Marque" class='form-control' readonly="readonly"  value="<?php echo $marque;  ?>">
+            <input type="text" id='marque'  name="marque" class='form-control' readonly="readonly"  value="<?php echo $marque;  ?>">
 
         </div>
     </div>
 <div class='form-row'>
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
             <label >Model</label>
-             <input type="text" id='Model'  name="Model" class='form-control' readonly="readonly"  value="<?php echo $model;  ?>">
+             <input type="text" id='model'  name="model" class='form-control' readonly="readonly"  value="<?php echo $model;  ?>">
 
         </div>
 
         <div class='form-group col-md-2'  style='display: inline-block; margin-right:50px;'>
             <label >Categorie</label>
-             <input type="text" id='Categorie'  name="Categorie" class='form-control' readonly="readonly"  value="<?php echo $categorie;  ?>">
+             <input type="text" id='Categorie'  name="categorie" class='form-control' readonly="readonly"  value="<?php echo $categorie;  ?>">
 
         </div>
 </div>
@@ -239,23 +215,23 @@ $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
 
     <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
           <label >Nom</label>
-          <input type='text'  name="prix_location" class='form-control' id='Prix' value="<?php //echo $ ?>">
+          <input type='text'  name="nom" class='form-control' id='Prix' value="<?php //echo $ ?>">
     </div>
     <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
           <label >Prenom</label>
-          <input type='text'  name="prix_location" class='form-control' id='Prix' value="<?php //echo $ ?>">
+          <input type='text'  name="prenom" class='form-control' id='Prix' value="<?php //echo $ ?>">
     </div>
  </div>
     <div class='form-row'>
 <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
-          <label >Num permis</label>
-          <input type='text'  name="prix_location" class='form-control' id='Prix' value="<?php //echo $ ?>">
+          <label >Tel</label>
+          <input type='text'  name="tel" class='form-control' id='Prix' value="<?php //echo $ ?>">
     </div>
 
-    <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
+    <!-- <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
           <label >Email</label>
           <input type='email'  name="email" class='form-control' id='email' value="<?php //echo $ ?>">
-    </div>
+    </div> -->
 
 
 </div>
