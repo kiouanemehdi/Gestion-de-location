@@ -1,0 +1,17 @@
+*********Contrat de Location*********
+Nom :KIOUANE 
+ Prenom: el mehdi 
+   Permis: JB511465 
+   Email: zertyuio@gmail.com
+
+Marque: renault  model: clio 
+   prix_location: 8
+
+Date de location: 2021-10-02 
+   Date de retour: 2021-10-17
+
+Prix de location par jour : 8
+
+Merci de votre confiance: 
+
+ Signature Client  :                    cachet Agence:

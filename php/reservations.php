@@ -96,11 +96,18 @@ $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
             $date_location=$_POST['date_debut'];
             $date_retour=$_POST['date_fin'];
             $montant=$_POST['prix_voit'];
-        $conn->query("INSERT INTO reservation (id_client,id_voiture,date_location,date_retour,montant) VALUES ('$id_client','$id_voiture_add','$date_location','$date_retour','$montant')") or die($conn->error);
-        header("location:reservations.php");
+
+
+
+        
+       /* header("location:reservations.php");
     }
     if(isset($_POST['contrat']))
-    {
+    {*/
+
+        
+
+
         $mat_voiture=$_POST['mat_voiture'];
         $date_location=$_POST['date_debut'];
         $date_retour=$_POST['date_fin'];
@@ -110,19 +117,27 @@ $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
         $montant=$_POST['prix'];
         $model=$_POST['model'];
         $marque=$_POST['marque'];
+        $email=$_POST['email'];
 
-        $test=fopen("$mat_voiture-$nom.txt","a+");
-        file_put_contents("$mat_voiture-$nom.txt", '*********Contrat de Location*********',FILE_APPEND);
+
+        if (!file_exists("../Contrat/"."$nom")) 
+        {
+                mkdir("../Contrat/"."$nom", 0777, true);
+        }
+
+
+        $test=fopen("../Contrat/"."$nom"."/"."$mat_voiture"."_"."$date_location"."_"."$date_retour.txt","a+");
+        file_put_contents("../Contrat/"."$nom"."/"."$mat_voiture"."_"."$date_location"."_"."$date_retour.txt", '*********Contrat de Location*********',FILE_APPEND);
         fwrite($test, "\n");
-        file_put_contents("$mat_voiture-$nom.txt", "Nom :$nom \n Prenom: $prenom \n   tel: $tel",FILE_APPEND);
+        file_put_contents("../Contrat/"."$nom"."/"."$mat_voiture"."_"."$date_location"."_"."$date_retour.txt", "Nom :$nom \n Prenom: $prenom \n   Permis: $tel \n   Email: $email",FILE_APPEND);
         fwrite($test, "\n\n");
-        file_put_contents("$mat_voiture-$nom.txt", "Marque: $marque  model: $model \n   prix_location: $mat_voiture",FILE_APPEND);
+        file_put_contents("../Contrat/"."$nom"."/"."$mat_voiture"."_"."$date_location"."_"."$date_retour.txt", "Marque: $marque  model: $model \n   prix_location: $montant",FILE_APPEND);
         fwrite($test, "\n\n");
-        file_put_contents("$mat_voiture-$nom.txt", "Date de location: $date_location \n   Date de retour: $date_retour",FILE_APPEND);
+        file_put_contents("../Contrat/"."$nom"."/"."$mat_voiture"."_"."$date_location"."_"."$date_retour.txt", "Date de location: $date_location \n   Date de retour: $date_retour",FILE_APPEND);
         fwrite($test, "\n\n");
-        file_put_contents("$mat_voiture-$nom.txt", "Prix de location par jour : $montant",FILE_APPEND);
+        file_put_contents("../Contrat/"."$nom"."/"."$mat_voiture"."_"."$date_location"."_"."$date_retour.txt", "Prix de location par jour : $montant",FILE_APPEND);
         fwrite($test, "\n\n");
-        file_put_contents("$mat_voiture-$nom.txt", "Merci de votre confiance: \n\n Signature Client  :                    cachet Agence:",FILE_APPEND);
+        file_put_contents("../Contrat/"."$nom"."/"."$mat_voiture"."_"."$date_location"."_"."$date_retour.txt", "Merci de votre confiance: \n\n Signature Client  :                    cachet Agence:",FILE_APPEND);
         
         
         header("location:reservations.php");
@@ -224,8 +239,12 @@ $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
  </div>
     <div class='form-row'>
 <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
-          <label >Tel</label>
-          <input type='text'  name="tel" class='form-control' id='Prix' value="<?php //echo $ ?>">
+          <label >Permis</label>
+          <input type='text'  name="tel" class='form-control' id='tel' value="<?php //echo $ ?>">
+    </div>
+    <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
+          <label >Email</label>
+          <input type='email'  name="email" class='form-control' id='email' value="<?php //echo $ ?>">
     </div>
 
     <!-- <div class='form-group col-md-2'   style='display: inline-block; margin-right:50px;'>
@@ -244,7 +263,7 @@ $conn=new mysqli('localhost','root','','location') or die(mysqli_error($conn));
                 <button id='modifier' name="modifier" class='btn btn-success'> Modifier </button>
             <?php else: ?>
                 <button id='ajouter' name="ajouter" class='btn btn-success'> Ajouter </button>
-                <button id='contrat' name="contrat" class='btn btn-primary'> contrat </button>
+                <!--<button id='contrat' name="contrat" class='btn btn-primary'> contrat </button>-->
             <?php endif; ?>
                 
                 <button id='effacer'class='btn btn-warning'> Effacer </button>

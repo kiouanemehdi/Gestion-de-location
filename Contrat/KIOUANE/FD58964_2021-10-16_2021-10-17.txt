@@ -1,0 +1,17 @@
+*********Contrat de Location*********
+Nom :KIOUANE 
+ Prenom: el mehdi 
+   Permis: dddd 
+   Email: dddddd@gmail.com
+
+Marque: renault  model: XS 
+   prix_location: 52
+
+Date de location: 2021-10-16 
+   Date de retour: 2021-10-17
+
+Prix de location par jour : 52
+
+Merci de votre confiance: 
+
+ Signature Client  :                    cachet Agence:

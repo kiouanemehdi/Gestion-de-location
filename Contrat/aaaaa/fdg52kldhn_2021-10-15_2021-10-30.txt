@@ -1,0 +1,17 @@
+*********Contrat de Location*********
+Nom :aaaaa 
+ Prenom: bbbbb 
+   Permis: 51651fbd 
+   Email: aaabbb@gmail.com
+
+Marque: tesla  model: 3 
+   prix_location: 30
+
+Date de location: 2021-10-15 
+   Date de retour: 2021-10-30
+
+Prix de location par jour : 30
+
+Merci de votre confiance: 
+
+ Signature Client  :                    cachet Agence:
